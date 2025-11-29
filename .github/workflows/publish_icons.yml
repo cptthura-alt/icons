@@ -36,7 +36,7 @@ jobs:
         working-directory: ./packages/icons
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           token: ${{ secrets.DEVTOOLS_GITHUB_TOKEN }}
 
@@ -90,14 +90,6 @@ jobs:
           branch: ${{ github.ref }}
           tags: true
 
-      - name: Setup NPM Auth Token to .yarnrc.yml
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPMJS_PUBLISH_TOKEN }}
-        shell: bash
-        run: |
-          yarn config set npmAlwaysAuth true
-          yarn config set npmAuthToken $NODE_AUTH_TOKEN
-
       - name: Publishing tagged release
         if: ${{ github.event.inputs.tag }}
         run: |
@@ -128,7 +120,7 @@ jobs:
         shell: bash
 
       - name: Upload payload data to artifact for deploy workflow
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: publish_workflow_payload
           path: publish_workflow_payload/

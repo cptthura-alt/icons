@@ -12,14 +12,14 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Node setup
         uses: ./.github/actions/node-setup
 
       - run: yarn build
       - name: Uploading docs artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: docs
           path: packages/icons/docs/
@@ -30,9 +30,9 @@ jobs:
     # Skip deploy from forked repo
     if: github.event.pull_request.base.repo.id == github.event.pull_request.head.repo.id
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Download docs artifact
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: docs
           path: tmp
@@ -70,7 +70,7 @@ jobs:
     env:
       CI_JOB_NUMBER: 1
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Node setup
         uses: ./.github/actions/node-setup
@@ -88,7 +88,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Node setup
         uses: ./.github/actions/node-setup
@@ -100,7 +100,7 @@ jobs:
     name: Check dependencies
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Enable Corepack
         run: corepack enable
